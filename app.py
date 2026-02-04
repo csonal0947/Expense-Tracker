@@ -1,3 +1,4 @@
+import os
 from flask import Flask, make_response, redirect,render_template, request, url_for , flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date , datetime
@@ -5,11 +6,14 @@ from sqlalchemy import func
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = (
-    "mysql+pymysql://root@localhost:3306/expenses_db"
-)
+# Use DATABASE_URL from environment (Render provides this), fallback to local MySQL for development
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    'DATABASE_URL', 
+    'mysql+pymysql://root@localhost:3306/expenses_db'
+).replace('postgres://', 'postgresql://')  # Render uses postgres:// but SQLAlchemy needs postgresql://
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'my_secret_key'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'my_secret_key')
 db = SQLAlchemy(app)
 
 class Expense(db.Model):
