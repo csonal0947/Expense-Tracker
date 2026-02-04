@@ -2,6 +2,10 @@
 
 A modern, responsive expense tracking web application built with Flask and MySQL. Track your daily expenses, categorize spending, and visualize your financial data with interactive charts.
 
+## 🚀 Live Demo
+
+**[View Live App](https://expense-tracker-1-3uu4.onrender.com/)**
+
 ![Python](https://img.shields.io/badge/Python-3.x-blue)
 ![Flask](https://img.shields.io/badge/Flask-3.x-green)
 ![MySQL](https://img.shields.io/badge/MySQL-8.x-orange)
